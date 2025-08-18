@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aymen Benmerrouche | Portfolio</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Poppins (sans-serif) & Fira Code (monospace) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <style>
+        /* Custom styles for the futuristic UI */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #0a0a0a;
+            color: #e0e0e0;
+            overflow-x: hidden;
+            scroll-behavior: smooth; /* Added for smooth scrolling */
+        }
+
+        /* Custom font for code-like elements */
+        .font-mono {
+            font-family: 'Fira Code', monospace;
+        }
+
+        /* Glassmorphism effect */
+        .glass-panel {
+            background: rgba(20, 20, 22, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Neon glow effect for buttons and accents */
+        .neon-glow-cyan {
+            box-shadow: 0 0 5px #00f6ff, 0 0 15px #00f6ff, 0 0 25px #00f6ff, 0 0 50px #00f6ff;
+        }
+        
+        .neon-glow-magenta {
+            box-shadow: 0 0 5px #ff00c1, 0 0 15px #ff00c1, 0 0 25px #ff00c1, 0 0 50px #ff00c1;
+        }
+
+        .neon-text-cyan {
+            text-shadow: 0 0 3px #00f6ff, 0 0 10px #00f6ff;
+        }
+        
+        .neon-text-magenta {
+            text-shadow: 0 0 3px #ff00c1, 0 0 10px #ff00c1;
+        }
+
+        /* Animated gradient border */
+        .animated-border {
+            position: relative;
+            overflow: hidden;
+        }
+        .animated-border::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(
+                transparent,
+                rgba(0, 246, 255, 0.8),
+                transparent 30%
+            );
+            animation: rotate 6s linear infinite;
+        }
+        .animated-border > * {
+            position: relative;
+            z-index: 1;
+        }
+        @keyframes rotate {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Custom scrollbar for a more integrated look */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0a0a0a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #00f6ff;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #00c5cc;
+        }
+
+        /* Fade-in animation for sections */
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .fade-in-section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="relative">
+
+    <!-- Matrix Background Canvas -->
+    <canvas id="matrix-bg" class="fixed top-0 left-0 w-full h-full z-0 opacity-10"></canvas>
+
+    <!-- Abstract Shapes -->
+    <div class="absolute top-0 left-0 w-full h-full overflow-hidden z-0">
+        <div class="absolute -top-40 -left-40 w-96 h-96 bg-cyan-500/10 rounded-full filter blur-3xl animate-pulse"></div>
+        <div class="absolute -bottom-40 -right-40 w-96 h-96 bg-pink-500/10 rounded-full filter blur-3xl animate-pulse animation-delay-4000"></div>
+    </div>
+
+    <div class="relative z-10">
+        <!-- Header -->
+        <header class="fixed top-0 left-0 w-full glass-panel z-50">
+            <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+                <a href="#" class="text-xl font-bold neon-text-cyan font-mono">&lt;Aymen /&gt;</a>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#about" class="hover:text-cyan-400 transition-colors">About</a>
+                    <a href="#education" class="hover:text-cyan-400 transition-colors">Education</a>
+                    <a href="#projects" class="hover:text-cyan-400 transition-colors">Projects</a>
+                    <a href="#experience" class="hover:text-cyan-400 transition-colors">Experience</a>
+                    <a href="#skills" class="hover:text-cyan-400 transition-colors">Skills</a>
+                    <a href="#contact" class="hover:text-cyan-400 transition-colors">Contact</a>
+                </div>
+            </nav>
+        </header>
+
+        <main class="container mx-auto px-6">
+            <!-- Hero Section -->
+            <section id="hero" class="min-h-screen flex flex-col md:flex-row items-center justify-center text-center md:text-left pt-20">
+                <div class="md:w-1/2 space-y-4">
+                    <h1 class="text-5xl md:text-7xl font-bold">Aymen Benmerrouche</h1>
+                    <p class="text-2xl text-gray-300">ABM DEV <span class="text-pink-400">💖</span></p>
+                    <a href="#contact" class="inline-block mt-6 px-8 py-3 bg-cyan-500 text-black font-bold rounded-lg hover:bg-cyan-400 transition-all transform hover:scale-105 neon-glow-cyan">
+                        Get in Touch
+                    </a>
+                </div>
+                <div class="md:w-1/2 mt-10 md:mt-0 flex justify-center">
+                    <div class="relative w-64 h-64 md:w-80 md:h-80 animated-border rounded-full p-1">
+                        <img src="C:\Users\utilisateur\OneDrive\Desktop\600-600 benmerrouche.jpg?text=Aymen" 
+                             alt="Aymen Benmerrouche Avatar" 
+                             class="rounded-full w-full h-full object-cover bg-gray-900">
+                    </div>
+                </div>
+            </section>
+
+            <!-- About Section -->
+            <section id="about" class="py-20 fade-in-section">
+                <h2 class="text-4xl font-bold text-center mb-12 neon-text-magenta">About Me</h2>
+                <div class="max-w-4xl mx-auto glass-panel p-8 rounded-2xl">
+                    <p class="text-lg leading-relaxed">
+                        I am Aymen Benmerrouche, from Bordj Bou Arréridj, Algeria, currently pursuing a Master’s in Computer Engineering with a focus on Decision Information Systems. I specialize in mobile & web development, decision systems, and creating innovative digital solutions. My experience includes developing educational tools, contributing to environmental awareness projects, and completing impactful business intelligence internships. I thrive on transforming complex challenges into user-friendly applications.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Education Section -->
+            <section id="education" class="py-20 fade-in-section">
+                <h2 class="text-4xl font-bold text-center mb-12 neon-text-cyan">Education</h2>
+                <div class="max-w-4xl mx-auto space-y-8">
+                    <div class="glass-panel p-6 rounded-2xl">
+                        <h3 class="text-xl font-bold text-cyan-400">Master's en Business Intelligence</h3>
+                        <p class="font-mono text-sm text-gray-400">University of Bordj Bou Arréridj | 2024 - 2026</p>
+                        <p class="mt-2 text-gray-300">Specialization in Business Intelligence.</p>
+                    </div>
+                    <div class="glass-panel p-6 rounded-2xl">
+                        <h3 class="text-xl font-bold text-cyan-400">Licence en Systeme d'information </h3>
+                        <p class="font-mono text-sm text-gray-400">University of Bordj Bou Arréridj | 2020 - 2024</p>
+                        <p class="mt-2 text-gray-300">Focused on systeme d'information.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Projects Section -->
+            <section id="projects" class="py-20 fade-in-section">
+                <h2 class="text-4xl font-bold text-center mb-12 neon-text-magenta">Projects</h2>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Project Card 1 -->
+                    <div class="glass-panel p-6 rounded-2xl border border-transparent hover:border-magenta-500 transition-all group">
+                        <h3 class="text-2xl font-bold mb-2 text-magenta-400">Biodiversity Inventory App</h3>
+                        <p class="text-gray-400 mb-4">Mobile app for geolocation and data management of biodiversity in the Bou Arréridj forest.</p>
+                        <div class="flex flex-wrap gap-2 font-mono text-sm">
+                            <span class="bg-pink-900/50 px-2 py-1 rounded">React Native</span>
+                            
+                            <span class="bg-pink-900/50 px-2 py-1 rounded">supabase</span>
+                        </div>
+                    </div>
+                    <!-- Project Card 2 -->
+                    <div class="glass-panel p-6 rounded-2xl border border-transparent hover:border-magenta-500 transition-all group">
+                        <h3 class="text-2xl font-bold mb-2 text-magenta-400">E-commerce for Physics Lessons</h3>
+                        <p class="text-gray-400 mb-4">Website for Prof. Djamel Maireche, focusing on online pedagogy and lesson delivery.</p>
+                        <div class="flex flex-wrap gap-2 font-mono text-sm">
+                            <span class="bg-pink-900/50 px-2 py-1 rounded">Laravel 11</span>
+                            <span class="bg-pink-900/50 px-2 py-1 rounded">MySQL</span>
+                            <span class="bg-pink-900/50 px-2 py-1 rounded">HTML/CSS</span>
+                        </div>
+                    </div>
+                                </section>
+
+            <!-- Experience Section -->
+            <section id="experience" class="py-20 fade-in-section">
+                <h2 class="text-4xl font-bold text-center mb-12 neon-text-cyan">Experience</h2>
+                <div class="max-w-4xl mx-auto space-y-8">
+                    <div class="glass-panel p-6 rounded-2xl">
+                        <h3 class="text-xl font-bold text-cyan-400">Stage appliqué, Direction Systéme D’Information CONDOR | Bordj Bou Arreridj</h3>
+                        <p class="font-mono text-sm text-gray-400">CONDOR | Summer 2025</p>
+                        <ul class="list-disc list-inside mt-2 text-gray-300">
+                            <li>Stage applique sur le service business intelligence.</li>
+                            <li>Stage applique sur le service operation systémes.</li>
+                            
+                        </ul>
+                    </div>
+                    <div class="glass-panel p-6 rounded-2xl">
+                        <h3 class="text-xl font-bold text-cyan-400">Développement d'une application mobile pour l'inventaire de la biodiversité</h3>
+                        <p class="font-mono text-sm text-gray-400">Stage appliqué, développeur | Bordj Bou Arreridj | 11/2023 – 01/2024</p>
+                        <ul class="list-disc list-inside mt-2 text-gray-300">
+                            <li>Développement d'une application mobile pour l'inventaire de la biodiversité.</li>
+                            <li>Projet visant à créer une application pour inventorier la faune et la flore de la forêt de Bou Arreridj, en utilisant des technologies de géolocalisation et de gestion de données..</li>
+                            
+                        </ul>
+                    </div>
+                    <div class="glass-panel p-6 rounded-2xl">
+                        <h3 class="text-xl font-bold text-cyan-400">Développement d’un site web pour la vente de cours</h3>
+                        <p class="font-mono text-sm text-gray-400">Freelance | Summer 2024</p>
+                        <ul class="list-disc list-inside mt-2 text-gray-300">
+                            <li>Site web de vente de cours particuliers en physique.</li>
+                            <li>Développement d’un site web pour la vente de cours particuliers en physique pour le professeur Djamel Maireche, permettant aux étudiants d’accéder à des ressources pédagogiques et deréserver des séances en ligne.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Skills Section -->
+            <section id="skills" class="py-20 fade-in-section">
+                <h2 class="text-4xl font-bold text-center mb-12 neon-text-magenta">Skills</h2>
+                <div class="max-w-5xl mx-auto grid md:grid-cols-3 gap-8 text-center">
+                    <!-- Technical Skills -->
+                    <div class="glass-panel p-6 rounded-2xl">
+                        <h3 class="text-2xl font-bold mb-4 text-magenta-400">Technical</h3>
+                        <div class="flex flex-wrap justify-center gap-3 font-mono">
+                            <span class="bg-gray-700 px-3 py-1 rounded-full">React Native</span>
+                            <span class="bg-gray-700 px-3 py-1 rounded-full">Java</span>
+                            <span class="bg-gray-700 px-3 py-1 rounded-full">ETL</span>
+                            <span class="bg-gray-700 px-3 py-1 rounded-full">Tableau</span>
+                            <span class="bg-gray-700 px-3 py-1 rounded-full">SSIS</span>
+                            <span class="bg-gray-700 px-3 py-1 rounded-full">POWER BI</span>
+                            <span class="bg-gray-700 px-3 py-1 rounded-full">SQL</span>
+                            <span class="bg-gray-700 px-3 py-1 rounded-full">Laravel 11</span>
+                            <span class="bg-gray-700 px-3 py-1 rounded-full">HTML5/CSS</span>
+                            <span class="bg-gray-700 px-3 py-1 rounded-full">Microsoft Office</span>
+                        </div>
+                    </div>
+                    <!-- Soft Skills -->
+                    <div class="glass-panel p-6 rounded-2xl">
+                        <h3 class="text-2xl font-bold mb-4 text-magenta-400">Soft Skills</h3>
+                        <div class="flex flex-wrap justify-center gap-3 font-mono">
+                             <span class="bg-gray-700 px-3 py-1 rounded-full">Teamwork</span>
+                             <span class="bg-gray-700 px-3 py-1 rounded-full">Quick Learning</span>
+                             <span class="bg-gray-700 px-3 py-1 rounded-full">Motivation</span>
+                             <span class="bg-gray-700 px-3 py-1 rounded-full">Problem Solving</span>
+                        </div>
+                    </div>
+                    <!-- Languages -->
+                    <div class="glass-panel p-6 rounded-2xl">
+                        <h3 class="text-2xl font-bold mb-4 text-magenta-400">Languages</h3>
+                        <div class="space-y-2 text-left max-w-xs mx-auto">
+                            <p>Arabic <span class="float-right text-magenta-400">●●●●●</span></p>
+                            <p>English <span class="float-right text-magenta-400">●●●<span class="text-gray-600">○○</span></span></p>
+                            <p>French <span class="float-right text-magenta-400">●●<span class="text-gray-600">○○○</span></span></p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Contact Section -->
+            <section id="contact" class="py-20 text-center fade-in-section">
+                <h2 class="text-4xl font-bold mb-4 neon-text-cyan">Let's Connect</h2>
+                <p class="max-w-2xl mx-auto mb-8 text-gray-400">I'm currently available for freelance work and new opportunities. Feel free to reach out!</p>
+                <div class="flex justify-center items-center space-x-8 text-4xl">
+                    <a href="mailto:aymenbenmerrouche@gmail.com" class="text-gray-400 hover:text-cyan-400 hover:scale-110 transition-all" aria-label="Email">
+                        <i class="fas fa-envelope"></i>
+                    </a>
+                    <a href="https://github.com/aymen-benmerrouche" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-cyan-400 hover:scale-110 transition-all" aria-label="GitHub">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="https://linkedin.com/in/aymen-benmerrouche" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-cyan-400 hover:scale-110 transition-all" aria-label="LinkedIn">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="text-center py-6 border-t border-gray-800">
+            <p class="text-gray-500 font-mono text-sm">Designed & Built by Aymen Benmerrouche</p>
+        </footer>
+    </div>
+
+    <script>
+        // Matrix background effect
+        const canvas = document.getElementById('matrix-bg');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890@#$%^&*()';
+        const fontSize = 16;
+        const columns = canvas.width / fontSize;
+
+        const drops = [];
+        for (let x = 0; x < columns; x++) {
+            drops[x] = 1;
+        }
+
+        function draw() {
+            ctx.fillStyle = 'rgba(10, 10, 10, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.fillStyle = '#00f6ff'; // Neon cyan
+            ctx.font = fontSize + 'px arial';
+
+            for (let i = 0; i < drops.length; i++) {
+                const text = letters[Math.floor(Math.random() * letters.length)];
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                drops[i]++;
+            }
+        }
+
+        setInterval(draw, 33);
+        
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        // Scroll-triggered fade-in effect
+        const sections = document.querySelectorAll('.fade-in-section');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
